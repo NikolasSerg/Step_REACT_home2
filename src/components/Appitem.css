@@ -1,0 +1,10 @@
+i {
+    display: block;
+    margin: auto;
+}
+i:hover {
+    color: blue;
+}
+i:active {
+    color: rgb(228, 33, 33);
+}
