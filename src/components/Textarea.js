@@ -15,22 +15,51 @@ const buttonstyle = {
 const Textarea = CreateReactClass({
     getInitialState: function () {
         return {
+            text:"",
+            error:""
         };
     },
-    handlerNewNotes: function() {
-        console.log(this.refs.note.value);
+    // handlerNewNotes: function() {
+    //     console.log(this.refs.note.value);
 
-        const note = {
-            text:this.refs.note.value,
-            color: "gray"
+    //     const note = {
+    //         text:this.state.text,
+    //         color: "gray"
+    //     };
+    //     this.props.onClick(note);
+    // },
+    handlerNewNotes: function() {
+        if(this.state.text){
+            let newNotes = {
+                text: this.state.text,
+                color: "red",
+                id: Date.now()
+            }
+            this.props.onClick(newNotes);
         };
-        this.props.onClick(note);
+        if(this.state.text === ""){
+            this.setState({
+                error:"empty value"
+            })
+        } else {
+            this.setState({
+                error: ""
+            })
+        }
     },
+    handlerChangeTextArea: function (event) {
+        this.setState({
+            text: event.target.value
+        });
+        console.log(event.target.value)
+    },
+   
     render(){
         return (
             <div className="row" style={style}>
                 <div className="col-12">
-                    <textarea style={textareastyle} ref={'note'}></textarea>
+                    <textarea style={textareastyle} ref={'note'} onChange={this.handlerChangeTextArea}></textarea>
+                    {this.state.error !== "" ? <div>{this.state.error}</div>: ""}
                     <button style={buttonstyle} onClick={this.handlerNewNotes}>Add</button>
                 </div>
             </div>

@@ -3,8 +3,7 @@ import CreateReactClass from 'create-react-class';
 // import Appitem from './Appitem';
 import Appitem from './Appitem1';
 
-const Applist
-   = CreateReactClass({
+const Applist = CreateReactClass({
     getInitialState () {
         return {
         };
