@@ -9,7 +9,9 @@ const Appitem = CreateReactClass({
        )
    },
     render(){
-         console.log(this.props.color);
+        //  console.log(this.props.color);
+        //  console.log(this.props.text);
+        //  console.log(this.props.id);
 
         const divStyle =  {backgroundColor: this.props.color};
             const textStyle = {height: "auto"};
@@ -23,16 +25,17 @@ const Appitem = CreateReactClass({
                         {/* <input type="button" value="close" onClick={this.buttonHandler}/> */}
                         
                         <div className="row">
-                            
                             <div className="col">
                                 <h3>{this.props.name}</h3>
                             </div>
                             <div className="col-1">
-                                <i class="fas fa-times-circle" onClick={this.buttonHandler}></i>        
+                                <i className="fas fa-times-circle" onClick={this.buttonHandler}></i>        
                             </div>
                         </div>
                         <div className="row">
                             <p style={textStyle}>{this.props.text}</p>
+                            {/* <p>{this.props.key}</p> */}
+                            <p>{this.props.id}</p>
                         </div>
                         
                         
@@ -41,13 +44,19 @@ const Appitem = CreateReactClass({
             </div>    
         )
     },
-    buttonHandler: function() {
-        if(this.state.delItems === false){
-            this.setState({delItems: true})
-        } else {
-            this.setState({delItems: false})
-        }
+    // buttonHandler: function() {
+    //     if(this.state.delItems === false){
+    //         this.setState({delItems: true})
+    //     } else {
+    //         this.setState({delItems: false})
+    //     }
+    // }
+    buttonHandler: function(){
+        let proba = this.props.id;
+        this.props.buttonHandler(proba);
+        // console.log(this.props.onClick);
     }
+    
 });
 
 export default Appitem;

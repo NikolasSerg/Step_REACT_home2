@@ -10,14 +10,17 @@ const Applist = CreateReactClass({
       },
    
     render(){
+        console.log(this.props.id);
         return (
             <div className="row">
-                {this.props.notes.map((e) => {
-                    return <Appitem key={e.id} name={e.name} text={e.text} color={e.color} />
+                {this.props.notes.map((iterator) => {
+                    return <Appitem key={iterator.id} id={iterator.id} text={iterator.text} color={iterator.color} buttonHandler = {this.props.buttonHandler} />
                 })}
             </div>
         )
-    }
+        
+    },
+   
 })
 
 export default Applist;

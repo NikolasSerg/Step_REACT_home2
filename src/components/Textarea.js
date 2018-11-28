@@ -33,7 +33,7 @@ const Textarea = CreateReactClass({
             let newNotes = {
                 text: this.state.text,
                 color: "red",
-                id: Date.now()
+                id: Date.now().toString()
             }
             this.props.onClick(newNotes);
         };
@@ -51,7 +51,7 @@ const Textarea = CreateReactClass({
         this.setState({
             text: event.target.value
         });
-        console.log(event.target.value)
+        // console.log(event.target.value)
     },
    
     render(){

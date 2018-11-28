@@ -4,7 +4,7 @@ import CreateReactClass from 'create-react-class';
 import Textarea from './components/Textarea';
 import Applist from './components/Applist';
 
-// const list = [
+// const notes = [
 //     {
 //         id: 1,
 //         name: "What is Lorem Ipsum?",
@@ -28,33 +28,77 @@ import Applist from './components/Applist';
 
 
 const App = CreateReactClass({
-    getInitialState () {
-        return { 
-          notes: []
+    getInitialState() {
+        return {
+            notes: []
+            //   notes
         };
     },
 
     handlerNewNote: function (newNote) {
         let newNotes = this.state.notes.slice();
         newNotes.unshift(newNote);
-        this.setState({notes: newNotes});
+        this.setState({ notes: newNotes });
     },
-    updateStorage: function() {
+    // updateStorage: function() {
+    //     let note = JSON.stringify(this.state.notes);
+    //     localStorage.setItem("notes", note);
+    // },
+    componentDidMount() {
+        let localDate = JSON.parse(localStorage.getItem('notes'));
+        // console.log(localDate);
+        if (localDate) {
+            this.setState({ notes: localDate })
+        }
+    },
+    componentDidUpdate() {
+        // this.updateStorage()
         let note = JSON.stringify(this.state.notes);
         localStorage.setItem("notes", note);
+        console.log(this.state)
     },
-    componentDidUpdate(){
-        this.updateStorage()
+
+
+    buttonHandler: function (e) {
+        if (e) {
+            console.log('its work');
+            console.log(this.state.notes);
+            console.log(e);
+            let oldState = this.state.notes;
+
+            let changeSt = oldState.filter(iterator => {
+                if(iterator.id !== e){
+                    console.log("iterator work");
+                    return (iterator);
+                } else {
+                    console.log("iterator doesnt work");
+                    return("");
+                }
+            }
+            );
+            console.log(changeSt)
+            console.log(this.state.notes)
+            this.setState({notes: changeSt});
+        } else {
+            console.log('dont work')
+        }
     },
-    render(){
+
+
+    // stateChangeItem: function() {
+    //     this.state.notes
+    // },
+    render() {
+        // console.log(this.state.notes + " - index");
         return (
             <div className="container-fluid">
                 <Textarea onClick={this.handlerNewNote} />
-                <Applist notes={this.state.notes}/>
+                <Applist notes={this.state.notes} buttonHandler={this.buttonHandler} />
             </div>
         )
     }
 })
-    
+
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
